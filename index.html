@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIVERSOUL | Nautical Supply</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* --- VARIABLES & THEME --- */
+        :root {
+            /* Deep Dark Navy/Black Background */
+            --bg-color: #050608;
+            --text-primary: #ffffff;
+            --text-secondary: #8892b0;
+
+            /* Accent Colors derived from the Logo (Red/Coral/Pink gradient) */
+            --accent-red: #e63946;
+            --accent-light: #ff8a95;
+            --accent-gradient: linear-gradient(90deg, #e63946, #ff8a95);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Montserrat', sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* --- BACKGROUND FX --- */
+        .bg-glow {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at 50% 50%, rgba(230, 57, 70, 0.08) 0%, rgba(5, 6, 8, 0) 70%);
+            z-index: -1;
+            animation: pulseGlow 4s infinite alternate;
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .content-wrapper {
+            text-align: center;
+            z-index: 10;
+            padding: 2rem;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        .brand-title {
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUpFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s forwards;
+            background: linear-gradient(to right, #fff, #ccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .brand-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-out 1s forwards;
+        }
+
+        /* --- LOGO ACCENT (The Triangle) --- */
+        .logo-mark {
+            width: 80px;
+            /* Slightly larger for the image */
+            height: auto;
+            margin: 0 auto 2rem;
+            position: relative;
+            opacity: 0;
+            animation: scaleIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s forwards;
+        }
+
+        .logo-image {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 15px rgba(230, 57, 70, 0.4));
+        }
+
+        /* --- LOADING BAR --- */
+        .loader-container {
+            margin: 4rem auto 0;
+            /* Auto margins for horizontal centering */
+            width: 240px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            border-radius: 2px;
+            opacity: 0;
+            animation: fadeIn 1s ease 1.5s forwards;
+        }
+
+        .loader-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: var(--accent-gradient);
+            box-shadow: 0 0 10px var(--accent-red);
+            animation: loadProgress 3.2s cubic-bezier(0.45, 0, 0.55, 1) 1.8s forwards;
+        }
+
+        .status-text {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.1em;
+            opacity: 0;
+            animation: fadeIn 1s ease 2s forwards;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes slideUpFade {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0) rotate(-30deg);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1) rotate(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes loadProgress {
+            0% {
+                width: 0%;
+            }
+
+            40% {
+                width: 45%;
+            }
+
+            70% {
+                width: 60%;
+            }
+
+            100% {
+                width: 100%;
+            }
+        }
+
+        @keyframes pulseGlow {
+            from {
+                opacity: 0.5;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .brand-title {
+                font-size: 2.5rem;
+                letter-spacing: 0.1em;
+            }
+
+            .brand-subtitle {
+                font-size: 0.9rem;
+                letter-spacing: 0.2em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg-glow"></div>
+
+    <div class="content-wrapper">
+        <!-- Geometric Logo Representation -->
+        <div class="logo-mark">
+            <img src="assets/logo-triangle.png" alt="RiverSoul Logo" class="logo-image">
+        </div>
+
+        <h1 class="brand-title">RiverSoul</h1>
+        <p class="brand-subtitle">Nautical Supply</p>
+
+        <div class="loader-container">
+            <div class="loader-bar"></div>
+        </div>
+
+        <p class="status-text">INICIANDO EXPERIENCIA...</p>
+    </div>
+
+    <script>
+        // Configuración de redirección
+        const redirectURL = "https://www.mercadolibre.com.ar/tienda/riversoul#origin=search_intervention&tracking_id=8cc6b19b-54c9-4e6c-b591-821559158c22";
+        const delayInMilliseconds = 5000; // 5 segundos para disfrutar la animación
+
+        // Actualizar texto de estado dinámicamente
+        const statusText = document.querySelector('.status-text');
+
+        setTimeout(() => {
+            statusText.innerText = "CONECTANDO CON TIENDA...";
+        }, 2500);
+
+        setTimeout(() => {
+            statusText.innerText = "REDIRECCIONANDO...";
+            statusText.style.color = "#fff";
+        }, 4200);
+
+        setTimeout(() => {
+            window.location.href = redirectURL;
+        }, delayInMilliseconds);
+    </script>
+</body>
+
+</html>
