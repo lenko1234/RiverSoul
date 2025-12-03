@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* --- VARIABLES & THEME --- */
         :root {
@@ -123,7 +124,7 @@
             width: 0%;
             background: var(--accent-gradient);
             box-shadow: 0 0 10px var(--accent-red);
-            animation: loadProgress 3.2s cubic-bezier(0.45, 0, 0.55, 1) 1.8s forwards;
+            animation: loadProgress 8s cubic-bezier(0.45, 0, 0.55, 1) 1.8s forwards;
         }
 
         .status-text {
@@ -203,6 +204,56 @@
                 letter-spacing: 0.2em;
             }
         }
+
+        /* --- WHATSAPP BUTTON --- */
+        .whatsapp-container {
+            margin-top: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            pointer-events: none;
+            /* Prevent clicks when hidden */
+        }
+
+        .whatsapp-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+
+        .whatsapp-btn {
+            background-color: #25D366;
+            color: #fff;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+            background-color: #20bd5a;
+        }
+
+        .whatsapp-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 
@@ -224,26 +275,38 @@
         </div>
 
         <p class="status-text">INICIANDO EXPERIENCIA...</p>
+
+        <div class="whatsapp-container">
+            <p class="whatsapp-text">¿Necesitas ayuda?</p>
+            <a href="https://wa.me/543442477560" target="_blank" class="whatsapp-btn">
+                <i class="fab fa-whatsapp" style="font-size: 1.4rem;"></i>
+                Escribinos al Wsp
+            </a>
+        </div>
     </div>
 
     <script>
         // Configuración de redirección
         const redirectURL = "https://www.mercadolibre.com.ar/tienda/riversoul#origin=search_intervention&tracking_id=8cc6b19b-54c9-4e6c-b591-821559158c22";
-        const delayInMilliseconds = 5000; // 5 segundos para disfrutar la animación
+        const delayInMilliseconds = 10000; // 10 segundos total (espera + carga)
 
-        // Actualizar texto de estado dinámicamente
+        // Elementos del DOM
         const statusText = document.querySelector('.status-text');
+        const whatsappContainer = document.querySelector('.whatsapp-container');
 
+        // 1. Texto de carga inicial
         setTimeout(() => {
-            statusText.innerText = "CONECTANDO CON TIENDA...";
-        }, 2500);
+            statusText.innerText = "CARGANDO CATÁLOGO...";
+        }, 2000);
 
+        // 2. Mostrar botón de WhatsApp a mitad de camino (3s)
         setTimeout(() => {
-            statusText.innerText = "REDIRECCIONANDO...";
-            statusText.style.color = "#fff";
-        }, 4200);
+            whatsappContainer.classList.add('visible');
+        }, 3000);
 
+        // 3. Redirección al finalizar la barra (10s)
         setTimeout(() => {
+            statusText.innerText = "ABRIENDO TIENDA...";
             window.location.href = redirectURL;
         }, delayInMilliseconds);
     </script>
